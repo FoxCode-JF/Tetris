@@ -2,6 +2,7 @@ package model;
 
 public class Cell
 {
+    private int coordY;
 
     public Cell(int x, int y)
     {
@@ -30,7 +31,7 @@ public class Cell
         this.coordY = coordY;
     }
 
-    private int coordY;
+
 
 
 }

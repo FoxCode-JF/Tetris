@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="79706c9d-5af1-4921-9d61-723b5111c89e" name="Default Changelist" comment="" />
+    <list default="true" id="79706c9d-5af1-4921-9d61-723b5111c89e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/controller/BoardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/controller/BoardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/controller/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/gui/GameBoardPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/gui/GameBoardPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/gui/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/gui/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino$Shape.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino$Shape.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/GameBoardPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/TetrominoShape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/TetrominoShape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Tetromino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Tetromino.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,15 +30,21 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1SlD7GTqBDBFIx5yEU6HoJ5rE44" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Swing1" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -80,22 +105,34 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572129119951</updated>
-      <workItem from="1572129126265" duration="72976000" />
+      <workItem from="1572129126265" duration="95845000" />
+      <workItem from="1572622797901" duration="2202000" />
+      <workItem from="1572625078573" duration="17481000" />
+      <workItem from="1572652277273" duration="543000" />
+      <workItem from="1572652858322" duration="25000" />
+      <workItem from="1572652915170" duration="174000" />
+      <workItem from="1572653118709" duration="16588000" />
+      <workItem from="1572694754425" duration="2303000" />
+      <workItem from="1572698236962" duration="1184000" />
+      <workItem from="1572704982054" duration="13307000" />
+      <workItem from="1572739572839" duration="7706000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/model/Board.java</url>
-          <line>71</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
