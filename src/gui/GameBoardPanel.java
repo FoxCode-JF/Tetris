@@ -1,6 +1,7 @@
 package gui;
 
 import model.Board;
+import model.Cell;
 import model.Tetromino;
 
 import javax.swing.*;
@@ -10,12 +11,17 @@ import java.awt.event.ActionListener;
 
 public class GameBoardPanel extends JPanel implements ActionListener
 {
-    private Board board = new Board();
-    private JPanel[][] boardView = new JPanel[board.getBOARD_SIZE_Y()][board.getBOARD_SIZE_Y()];
-
+    private Board board;
+    private JPanel[][] fallingBoardView;
+    //private BoardView[][] resultTable = new BoardView[board.getBOARD_SIZE_Y()][board.getBOARD_SIZE_Y()];
+    private JPanel[][] resultBoardView;
     Dimension dim = new Dimension();
-    public GameBoardPanel()
+
+    public GameBoardPanel(Board board)
     {
+        this.board = board;
+        this.fallingBoardView = new JPanel[board.getBOARD_SIZE_Y()][board.getBOARD_SIZE_Y()];
+        this.resultBoardView = new JPanel[board.getBOARD_SIZE_Y()][board.getBOARD_SIZE_Y()];
         setLayout(new GridLayout(board.getBOARD_SIZE_Y(), board.getBOARD_SIZE_X(), 2, 2));
 
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
@@ -28,12 +34,14 @@ public class GameBoardPanel extends JPanel implements ActionListener
         {
             for (int j = 0; j < board.getBOARD_SIZE_X(); j++)
             {
-                boardView[i][j] = new JPanel();
+                fallingBoardView[i][j] = new JPanel();
+                resultBoardView[i][j] = new JPanel();
 
-                boardView[i][j].setMaximumSize(dim);
-                boardView[i][j].setBackground(Color.BLUE);
+                fallingBoardView[i][j].setMaximumSize(dim);
+                fallingBoardView[i][j].setBackground(Color.BLUE);
+                resultBoardView[i][j].setBackground(Color.BLACK);
 
-                add(boardView[i][j]);
+                add(fallingBoardView[i][j]);
             }
         }
     }
@@ -43,44 +51,151 @@ public class GameBoardPanel extends JPanel implements ActionListener
     {
 
     }
+
     public void updateBoardView(Board board, Tetromino tetromino)
     {
-        boolean[][] temp = board.getFallingTable();
+        Cell[] tetrominoOnBoard = board.getTetromino();
+        boolean[][] tempFallingTable = board.getFallingTable();
+        boolean[][] tempResultTable = board.getResultTable();
 
-        //boardView[0][5].setBackground(Color.GREEN);
         for (int i = 0; i < board.getBOARD_SIZE_Y(); i++)
         {
             for (int j = 0; j < board.getBOARD_SIZE_X(); j++)
             {
-                boardView[i][j].setBackground(Color.BLACK);
-                if (temp[i][j])
-                {
-                    switch (tetromino.getCurrentShape())
+                fallingBoardView[i][j].setBackground(resultBoardView[i][j].getBackground());
+            }
+        }
+
+        for (Cell tetr : tetrominoOnBoard)
+        {
+            int x = tetr.getCoordX();
+            int y = tetr.getCoordY();
+            switch (tetromino.getCurrentShape())
+            {
+                case shapeI:
+                    fallingBoardView[y][x].setBackground(Color.CYAN);
+                    break;
+                case shapeJ:
+                    fallingBoardView[y][x].setBackground(Color.BLUE);
+                    break;
+                case shapeL:
+                    fallingBoardView[y][x].setBackground(Color.ORANGE);
+                    break;
+                case shapeO:
+                    fallingBoardView[y][x].setBackground(Color.YELLOW);
+                    break;
+                case shapeS:
+                    fallingBoardView[y][x].setBackground(Color.GREEN);
+                    break;
+                case shapeZ:
+                    fallingBoardView[y][x].setBackground(Color.RED);
+                    break;
+                case shapeT:
+                    fallingBoardView[y][x].setBackground(new Color(148, 0, 211));
+                    break;
+            }
+
+        }
+
+
+        //boardView[0][5].setBackground(Color.GREEN);
+//        for (int i = 0; i < board.getBOARD_SIZE_Y(); i++)
+//        {
+//            for (int j = 0; j < board.getBOARD_SIZE_X(); j++)
+//            {
+//            }
+//                resultBoardView[i][j].setBackground(Color.BLACK);
+//                //resultTable[i][j].setPanelPlaced(tempResultTable[i][j]);
+//
+//                if (tempFallingTable[i][j] || tempResultTable[i][j])
+//                {
+//                    switch (tetromino.getCurrentShape())
+//                    {
+//                        case shapeI:
+//                            resultBoardView[i][j].setBackground(Color.CYAN);
+//                            break;
+//                        case shapeJ:
+//                            resultBoardView[i][j].setBackground(Color.BLUE);
+//                            break;
+//                        case shapeL:
+//                            resultBoardView[i][j].setBackground(Color.ORANGE);
+//
+//                            break;
+//                        case shapeO:
+//                            resultBoardView[i][j].setBackground(Color.YELLOW);
+//                            break;
+//                        case shapeS:
+//                            resultBoardView[i][j].setBackground(Color.GREEN);
+//                            break;
+//                        case shapeZ:
+//                            resultBoardView[i][j].setBackground(Color.RED);
+//                            break;
+//                        case shapeT:
+//                            resultBoardView[i][j].setBackground(new Color(148, 0, 211));
+//                            break;
+//                    }
+                    /*switch (tetromino.getCurrentShape())
                     {
                         case shapeI:
-                            boardView[i][j].setBackground(Color.CYAN);
-                            break;
+                            fallingBoardView[i][j].setBackground(Color.CYAN);
                         case shapeJ:
-                            boardView[i][j].setBackground(Color.BLUE);
+                            fallingBoardView[i][j].setBackground(Color.BLUE);
                             break;
                         case shapeL:
-                            boardView[i][j].setBackground(Color.ORANGE);
+                            fallingBoardView[i][j].setBackground(Color.ORANGE);
                             break;
                         case shapeO:
-                            boardView[i][j].setBackground(Color.YELLOW);
+                            fallingBoardView[i][j].setBackground(Color.YELLOW);
                             break;
                         case shapeS:
-                            boardView[i][j].setBackground(Color.GREEN);
+                            fallingBoardView[i][j].setBackground(Color.GREEN);
                             break;
                         case shapeZ:
-                            boardView[i][j].setBackground(Color.RED);
-                            break;
+                            fallingBoardView[i][j].setBackground(Color.RED);
                         case shapeT:
-                            boardView[i][j].setBackground(new Color(148,0,211));
+                            fallingBoardView[i][j].setBackground(new Color(148,0,211));
+                            //resultBoardView[i][j].setBackground(fallingBoardView[i][j].getBackground());
 
-                    }
+                    }*/
+                //}
+
+            //}
+        //}
+    }
+
+    public void updateResultBoard(Tetromino tetromino)
+    {
+        Cell[] tetrominoOnBoard = board.getTetromino();
+        for(Cell cell : tetrominoOnBoard)
+        {
+            int x = cell.getCoordX();
+            int y = cell.getCoordY();
+
+                switch (tetromino.getCurrentShape())
+                {
+                    case shapeI:
+                        resultBoardView[y][x].setBackground(Color.CYAN);
+                        break;
+                    case shapeJ:
+                        resultBoardView[y][x].setBackground(Color.BLUE);
+                        break;
+                    case shapeL:
+                        resultBoardView[y][x].setBackground(Color.ORANGE);
+
+                        break;
+                    case shapeO:
+                        resultBoardView[y][x].setBackground(Color.YELLOW);
+                        break;
+                    case shapeS:
+                        resultBoardView[y][x].setBackground(Color.GREEN);
+                        break;
+                    case shapeZ:
+                        resultBoardView[y][x].setBackground(Color.RED);
+                        break;
+                    case shapeT:
+                        resultBoardView[y][x].setBackground(new Color(148, 0, 211));
+                        break;
                 }
             }
         }
     }
-}

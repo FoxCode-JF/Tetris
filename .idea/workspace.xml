@@ -6,20 +6,14 @@
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/controller/BoardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/controller/BoardController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/controller/GameController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/gui/GameBoardPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/gui/GameBoardPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/gui/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/gui/MainFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board$Move.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board$Move.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino$Shape.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino$Shape.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/BoardView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/GameBoardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/TetrominoShape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/TetrominoShape.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Tetromino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Tetromino.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -44,7 +38,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Swing1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -115,8 +109,17 @@
       <workItem from="1572694754425" duration="2303000" />
       <workItem from="1572698236962" duration="1184000" />
       <workItem from="1572704982054" duration="13307000" />
-      <workItem from="1572739572839" duration="7706000" />
+      <workItem from="1572739572839" duration="18371000" />
+      <workItem from="1572781665070" duration="33845000" />
     </task>
+    <task id="LOCAL-00001" summary="Falling fixed">
+      <created>1572769619663</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1572769619663</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,5 +137,35 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Falling fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Falling fixed" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/gui/GameBoardPanel.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/gui/GameBoardPanel.java</url>
+          <line>167</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controller/GameController.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controller/GameController.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

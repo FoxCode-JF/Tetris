@@ -25,8 +25,12 @@ public class BoardController
 
     public void drawBoard()
     {
-        board.print();
+        board.fillTable();
         gameBoard.updateBoardView(board, tetromino);
+    }
+
+    public void updateResult(){
+        gameBoard.updateResultBoard(tetromino);
     }
 
 }

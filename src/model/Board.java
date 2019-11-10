@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.event.KeyAdapter;
-
 public class Board
 {
     public enum Move
@@ -16,12 +14,13 @@ public class Board
     private Cell currentRotationAxisPos ;
     private Cell[] currentTetrominoCoords;
 
+    private boolean stoppedFalling = false;
     private boolean gameStarted = false;
     private boolean isPaused = false;
 
     private final Cell STARTING_CELL =  new Cell(BOARD_SIZE_X % 2 == 0 ? BOARD_SIZE_X / 2 : BOARD_SIZE_X / 2 - 1, 0);
     private boolean fallingTable[][] = new boolean[BOARD_SIZE_Y][BOARD_SIZE_X];
-    private int resultTable[][] = new int[BOARD_SIZE_Y][BOARD_SIZE_X];
+    private boolean resultTable[][] = new boolean[BOARD_SIZE_Y][BOARD_SIZE_X];
 
     public Board(){
         currentRotationAxisPos = new Cell(STARTING_CELL.getCoordX(), STARTING_CELL.getCoordY());
@@ -36,50 +35,66 @@ public class Board
     {
         int x = currentRotationAxisPos.getCoordX();
         int y = currentRotationAxisPos.getCoordY();
-        boolean stop = false;
+        Cell nextIndex = new Cell(x, y);
+        stoppedFalling = false;
+
+     /*   int nextIndexX = currentCoord.getCoordX();
+        int nextIndexY= currentCoord.getCoordY() + 1;;
+
+        if(moveType == Move.right)
+        {
+            nextIndexX++;
+        } else if (moveType == Move.left)
+        {
+            nextIndexX--;
+        }*/
 
         switch(move)
         {
             case left:
-                if (!collisionDetected(this.currentRotationAxisPos, currentTetrominoCoords))
+                nextIndex.setCoordX(x - 1);
+                if (!collisionDetected(currentTetrominoCoords, nextIndex))
                 {
                     //if left border reached return
                     currentRotationAxisPos.setCoordX(x - 1);
                 }
                 break;
             case right:
-                if (!collisionDetected(this.currentRotationAxisPos, currentTetrominoCoords))
+                nextIndex.setCoordX(x + 1);
+                if (!collisionDetected(currentTetrominoCoords, nextIndex))
                 {
                     //if right border reached return
                     currentRotationAxisPos.setCoordX(x + 1);
                 }
                 break;
             case down:
-                if (!collisionDetected(this.currentRotationAxisPos, currentTetrominoCoords))
+                nextIndex.setCoordY(y + 1);
+                if (!collisionDetected(currentTetrominoCoords, nextIndex))
                 {
                     currentRotationAxisPos.setCoordY(y + 1);
-                }
-                else
+                } else
                 {
-                    stop = true;
+                    stoppedFalling = true;
                 }
                 break;
         }
-        return stop;
+        return stoppedFalling;
     }
 
-    private boolean collisionDetected(Cell currentCoord, Cell[] currentTetrominoCoords)
+    private boolean collisionDetected(Cell[] currentTetrominoCoords, Cell nextIndex)
     {
-        int nextIndexX = currentCoord.getCoordX() ;
-        int nextIndexY = currentCoord.getCoordY() + 1;
         for (Cell cell : currentTetrominoCoords)
         {
-//            if (nextIndexX + cell.getCoordX() <= 0 || nextIndexX + cell.getCoordX() >= BOARD_SIZE_X)
-//            {
-//                //right or left border was reached
-//                return false;
-//            }
-            if (nextIndexY - cell.getCoordY() >= BOARD_SIZE_Y)
+            if (nextIndex.getCoordX() + cell.getCoordX() < 0 || nextIndex.getCoordX() + cell.getCoordX() >= BOARD_SIZE_X)
+            {
+                //right or left border was reached
+                return true;
+            }
+            if (nextIndex.getCoordY() + cell.getCoordY() >= BOARD_SIZE_Y)
+            {
+                return true;
+            }
+            if (resultTable[nextIndex.getCoordY() + cell.getCoordY()][nextIndex.getCoordX() + cell.getCoordX()])
             {
                 return true;
             }
@@ -93,11 +108,12 @@ public class Board
      */
     public void placeTetromino(Tetromino tetromino)
     {
+        stoppedFalling = false;
         currentTetrominoCoords = tetromino.getCurrentCells();
         setStartingPosition(tetromino);
     }
 
-    public void print()
+    public void fillTable()
     {
         for (int i = 0; i < BOARD_SIZE_Y; i++)
         {
@@ -112,16 +128,26 @@ public class Board
             int tempYpos = currentRotationAxisPos.getCoordY() + cell.getCoordY();
             int tempXPos = currentRotationAxisPos.getCoordX() + cell.getCoordX();
             fallingTable[tempYpos][tempXPos] = true;
+            if(stoppedFalling)
+            {
+                resultTable[tempYpos][tempXPos] = true;
+            }
         }
 
         for (int i = 0; i < BOARD_SIZE_Y; i++)
         {
             for (int j = 0; j < BOARD_SIZE_X; j++)
             {
-                if(fallingTable[i][j])
+                if(!fallingTable[i][j] && resultTable[i][j])
                     System.out.print("X ");
-                else
+                else if (fallingTable[i][j])
+                {
+                    System.out.print("X ");
+                } else
+                {
                     System.out.print("o ");
+                }
+
             }
             System.out.print('\n');
         }
@@ -158,8 +184,29 @@ public class Board
         return fallingTable;
     }
 
-    public void setCurrentRotationAxisPos(Cell currentRotationAxisPos)
+    public boolean isStoppedFalling()
     {
-        this.currentRotationAxisPos = currentRotationAxisPos;
+        return stoppedFalling;
+    }
+
+    public boolean[][] getResultTable()
+    {
+        return resultTable;
+    }
+
+    public Cell[] getTetromino()
+    {
+        if(currentTetrominoCoords == null)
+            return new Cell[0];
+
+        Cell[] tetromino = new Cell[currentTetrominoCoords.length];
+        for (int i = 0; i < currentTetrominoCoords.length; i++)
+        {
+            int tempYpos = currentRotationAxisPos.getCoordY() + currentTetrominoCoords[i].getCoordY();
+            int tempXPos = currentRotationAxisPos.getCoordX() + currentTetrominoCoords[i].getCoordX();
+            tetromino[i] = new Cell(tempXPos, tempYpos);
+        }
+
+        return tetromino;
     }
 }

@@ -7,23 +7,18 @@ import model.Tetromino;
 
 
 import javax.swing.Timer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
-public class GameController implements ActionListener
+public class GameController extends KeyAdapter implements ActionListener
 {
 
-    private int TIME_INTERVAL = 500;
-    Board.Move move;
+    private int TIME_INTERVAL = 300;
 
     private Tetromino tetromino = new Tetromino();
     private Board board = new Board();
     MainFrame mainFrame = new MainFrame();
-    private GameBoardPanel gameBoard = new GameBoardPanel();
+    private GameBoardPanel gameBoard = new GameBoardPanel(board);
     BoardController boardController = new BoardController(tetromino, board, gameBoard);
-
     private static boolean stoppedFalling =  true;
 
     public GameController()
@@ -31,44 +26,19 @@ public class GameController implements ActionListener
         Timer timer = new Timer(TIME_INTERVAL, this);
         timer.setActionCommand("timer");
         timer.start();
+        //Timer fastMode = new Timer(TIME_INTERVAL / 5, this);
+        //fastMode.start();
+        //timer.setActionCommand("fastMode");
+
         mainFrame.add(gameBoard);
-
-        gameBoard.addKeyListener(new KeyListener()
-        {
-            @Override
-            public void keyTyped(KeyEvent keyEvent)
-            {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent keyEvent)
-            {
-                int keyCode = keyEvent.getKeyCode();
-                if (!stoppedFalling)
-                {
-                    switch(keyCode)
-                    {
-                        case KeyEvent.VK_D:
-                            board.moveTetromino(Board.Move.right);
-                            System.out.println("right");
-                            break;
-                    }
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent keyEvent)
-            {
-
-            }
-        });
+        mainFrame.addKeyListener(this);
     }
 
     private void run()
     {
         if (stoppedFalling)
         {
+            boardController.updateResult();
             boardController.addNewTetromino();
             stoppedFalling = false;
         }
@@ -88,7 +58,27 @@ public class GameController implements ActionListener
                 run();
                 break;
         }
+    }
 
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
 
+        int key = e.getKeyCode();
+
+        switch (key)
+        {
+            case KeyEvent.VK_RIGHT:
+                board.moveTetromino(Board.Move.right);
+                break;
+            case KeyEvent.VK_LEFT:
+                board.moveTetromino(Board.Move.left); // moves block left
+                break;
+            case KeyEvent.VK_DOWN:
+                //rotate block
+                break;
+            case KeyEvent.VK_P:
+                //pause game
+        }
     }
 }
