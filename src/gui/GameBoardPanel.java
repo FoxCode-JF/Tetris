@@ -166,6 +166,7 @@ public class GameBoardPanel extends JPanel implements ActionListener
     public void updateResultBoard(Tetromino tetromino)
     {
         Cell[] tetrominoOnBoard = board.getTetromino();
+
         for(Cell cell : tetrominoOnBoard)
         {
             int x = cell.getCoordX();
@@ -181,7 +182,6 @@ public class GameBoardPanel extends JPanel implements ActionListener
                         break;
                     case shapeL:
                         resultBoardView[y][x].setBackground(Color.ORANGE);
-
                         break;
                     case shapeO:
                         resultBoardView[y][x].setBackground(Color.YELLOW);

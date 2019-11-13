@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="79706c9d-5af1-4921-9d61-723b5111c89e" name="Default Changelist" comment="">
+    <list default="true" id="79706c9d-5af1-4921-9d61-723b5111c89e" name="Default Changelist" comment="Falling fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/controller/BoardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/controller/BoardController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/controller/GameController.class" afterDir="false" />
@@ -9,11 +9,13 @@
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board$Move.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board$Move.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Cell.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/TimeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/TimeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/GameBoardPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cell.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +112,11 @@
       <workItem from="1572698236962" duration="1184000" />
       <workItem from="1572704982054" duration="13307000" />
       <workItem from="1572739572839" duration="18371000" />
-      <workItem from="1572781665070" duration="33845000" />
+      <workItem from="1572781665070" duration="34444000" />
+      <workItem from="1573496513547" duration="15239000" />
+      <workItem from="1573640299829" duration="249000" />
+      <workItem from="1573640621799" duration="1497000" />
+      <workItem from="1573646517718" duration="5923000" />
     </task>
     <task id="LOCAL-00001" summary="Falling fixed">
       <created>1572769619663</created>
@@ -149,21 +155,6 @@
           <url>file://$PROJECT_DIR$/src/gui/GameBoardPanel.java</url>
           <line>61</line>
           <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/gui/GameBoardPanel.java</url>
-          <line>167</line>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controller/GameController.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controller/GameController.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="80" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

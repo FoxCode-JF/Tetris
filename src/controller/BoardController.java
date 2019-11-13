@@ -6,13 +6,12 @@ import model.Tetromino;
 
 public class BoardController
 {
-    private Tetromino tetromino;
+    private Tetromino tetromino = new Tetromino();
     private Board board;
     private GameBoardPanel gameBoard;
 
-    public BoardController(Tetromino tetromino, Board board, GameBoardPanel gameBoard)
+    public BoardController(Board board, GameBoardPanel gameBoard)
     {
-        this.tetromino = tetromino;
         this.board = board;
         this.gameBoard = gameBoard;
     }
@@ -33,4 +32,8 @@ public class BoardController
         gameBoard.updateResultBoard(tetromino);
     }
 
+    public Tetromino getTetromino()
+    {
+        return tetromino;
+    }
 }

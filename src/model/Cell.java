@@ -3,13 +3,14 @@ package model;
 public class Cell
 {
     private int coordY;
+    private int coordX;
 
     public Cell(int x, int y)
     {
         coordX = x;
         coordY = y;
     }
-    private int coordX;
+
 
     public int getCoordX()
     {

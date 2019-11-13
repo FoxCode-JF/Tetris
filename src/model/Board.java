@@ -1,12 +1,15 @@
 package model;
 
+import controller.BoardController;
+
 public class Board
 {
     public enum Move
     {
         left,
         right,
-        down
+        down,
+        rotate
     }
     private final int BOARD_SIZE_X = 12;
     private final int BOARD_SIZE_Y = 22;
@@ -16,7 +19,6 @@ public class Board
 
     private boolean stoppedFalling = false;
     private boolean gameStarted = false;
-    private boolean isPaused = false;
 
     private final Cell STARTING_CELL =  new Cell(BOARD_SIZE_X % 2 == 0 ? BOARD_SIZE_X / 2 : BOARD_SIZE_X / 2 - 1, 0);
     private boolean fallingTable[][] = new boolean[BOARD_SIZE_Y][BOARD_SIZE_X];
@@ -77,6 +79,24 @@ public class Board
                     stoppedFalling = true;
                 }
                 break;
+            case rotate:
+                for (Cell cell : currentTetrominoCoords)
+                {
+                    rotateCell(cell);
+                }
+                while(collisionDetected(currentTetrominoCoords, currentRotationAxisPos))
+                {
+                    if(x < BOARD_SIZE_X/2)
+                    {
+                        x++;
+                    } else if (x > BOARD_SIZE_X/2)
+                    {
+                        x--;
+                    }
+                    currentRotationAxisPos.setCoordX(x);
+                }
+
+                break;
         }
         return stoppedFalling;
     }
@@ -87,15 +107,17 @@ public class Board
         {
             if (nextIndex.getCoordX() + cell.getCoordX() < 0 || nextIndex.getCoordX() + cell.getCoordX() >= BOARD_SIZE_X)
             {
-                //right or left border was reached
+                // Right or left border was reached
                 return true;
             }
-            if (nextIndex.getCoordY() + cell.getCoordY() >= BOARD_SIZE_Y)
+            if (nextIndex.getCoordY() + cell.getCoordY() < 0 || nextIndex.getCoordY() + cell.getCoordY() >= BOARD_SIZE_Y)
             {
+                // Top or bottom border was reached
                 return true;
             }
             if (resultTable[nextIndex.getCoordY() + cell.getCoordY()][nextIndex.getCoordX() + cell.getCoordX()])
             {
+                // Placed tetrominos reached
                 return true;
             }
         }
@@ -113,6 +135,10 @@ public class Board
         setStartingPosition(tetromino);
     }
 
+    /**
+     * Initialize empty game table with false values
+     * write true values in taken cells
+     */
     public void fillTable()
     {
         for (int i = 0; i < BOARD_SIZE_Y; i++)
@@ -133,28 +159,36 @@ public class Board
                 resultTable[tempYpos][tempXPos] = true;
             }
         }
-
-        for (int i = 0; i < BOARD_SIZE_Y; i++)
-        {
-            for (int j = 0; j < BOARD_SIZE_X; j++)
-            {
-                if(!fallingTable[i][j] && resultTable[i][j])
-                    System.out.print("X ");
-                else if (fallingTable[i][j])
-                {
-                    System.out.print("X ");
-                } else
-                {
-                    System.out.print("o ");
-                }
-
-            }
-            System.out.print('\n');
-        }
-        System.out.println();
-        System.out.println();
+//
+//        for (int i = 0; i < BOARD_SIZE_Y; i++)
+//        {
+//            for (int j = 0; j < BOARD_SIZE_X; j++)
+//            {
+//                if(!fallingTable[i][j] && resultTable[i][j])
+//                    System.out.print("X ");
+//                else if (fallingTable[i][j])
+//                {
+//                    System.out.print("X ");
+//                } else
+//                {
+//                    System.out.print("o ");
+//                }
+//
+//            }
+//            System.out.print('\n');
+//        }
+//        System.out.println();
+//        System.out.println();
     }
+    private void rotateCell(Cell cell)
+    {
 
+            int tmpXCoord = cell.getCoordX();
+            int tmpYCoord = cell.getCoordY();
+
+            cell.setCoordX(tmpYCoord);
+            cell.setCoordY(tmpXCoord * (-1));
+    }
     private void setStartingPosition(Tetromino tetromino)
     {
         if (tetromino.getCurrentShape() != Tetromino.Shape.shapeI)
