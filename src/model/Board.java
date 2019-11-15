@@ -1,6 +1,7 @@
 package model;
 
-import controller.BoardController;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board
 {
@@ -11,18 +12,21 @@ public class Board
         down,
         rotate
     }
-    private final int BOARD_SIZE_X = 12;
-    private final int BOARD_SIZE_Y = 22;
+    static final int BOARD_SIZE_X = 12;
+    static final int BOARD_SIZE_Y = 22;
 
     private Cell currentRotationAxisPos ;
     private Cell[] currentTetrominoCoords;
 
     private boolean stoppedFalling = false;
-    private boolean gameStarted = false;
+    private int scoredRows = 0;
+    //private boolean gameOver = false;
 
     private final Cell STARTING_CELL =  new Cell(BOARD_SIZE_X % 2 == 0 ? BOARD_SIZE_X / 2 : BOARD_SIZE_X / 2 - 1, 0);
     private boolean fallingTable[][] = new boolean[BOARD_SIZE_Y][BOARD_SIZE_X];
-    private boolean resultTable[][] = new boolean[BOARD_SIZE_Y][BOARD_SIZE_X];
+
+    ShapeTab shapeTab = new ShapeTab();
+
 
     public Board(){
         currentRotationAxisPos = new Cell(STARTING_CELL.getCoordX(), STARTING_CELL.getCoordY());
@@ -35,21 +39,11 @@ public class Board
      */
     public boolean moveTetromino(Move move)
     {
+
         int x = currentRotationAxisPos.getCoordX();
         int y = currentRotationAxisPos.getCoordY();
         Cell nextIndex = new Cell(x, y);
         stoppedFalling = false;
-
-     /*   int nextIndexX = currentCoord.getCoordX();
-        int nextIndexY= currentCoord.getCoordY() + 1;;
-
-        if(moveType == Move.right)
-        {
-            nextIndexX++;
-        } else if (moveType == Move.left)
-        {
-            nextIndexX--;
-        }*/
 
         switch(move)
         {
@@ -93,9 +87,13 @@ public class Board
                     {
                         x--;
                     }
+                    else
+                    {
+                        y++;
+                    }
                     currentRotationAxisPos.setCoordX(x);
+                    currentRotationAxisPos.setCoordY(y);
                 }
-
                 break;
         }
         return stoppedFalling;
@@ -115,7 +113,7 @@ public class Board
                 // Top or bottom border was reached
                 return true;
             }
-            if (resultTable[nextIndex.getCoordY() + cell.getCoordY()][nextIndex.getCoordX() + cell.getCoordX()])
+            if (shapeTab.cellColored[nextIndex.getCoordY() + cell.getCoordY()][nextIndex.getCoordX() + cell.getCoordX()])
             {
                 // Placed tetrominos reached
                 return true;
@@ -139,8 +137,10 @@ public class Board
      * Initialize empty game table with false values
      * write true values in taken cells
      */
-    public void fillTable()
+    public void fillTable(Tetromino tetromino)
     {
+        List<Integer> rowsToErase;
+
         for (int i = 0; i < BOARD_SIZE_Y; i++)
         {
             for (int j = 0; j < BOARD_SIZE_X; j++)
@@ -151,38 +151,123 @@ public class Board
 
         for(Cell cell : currentTetrominoCoords)
         {
-            int tempYpos = currentRotationAxisPos.getCoordY() + cell.getCoordY();
+            int tempYPos = currentRotationAxisPos.getCoordY() + cell.getCoordY();
             int tempXPos = currentRotationAxisPos.getCoordX() + cell.getCoordX();
-            fallingTable[tempYpos][tempXPos] = true;
+            fallingTable[tempYPos][tempXPos] = true;
+
             if(stoppedFalling)
             {
-                resultTable[tempYpos][tempXPos] = true;
+                shapeTab.cellColored[tempYPos][tempXPos] = true;
+                shapeTab.shape[tempYPos][tempXPos] = tetromino.getCurrentShape();
             }
         }
-//
-//        for (int i = 0; i < BOARD_SIZE_Y; i++)
-//        {
-//            for (int j = 0; j < BOARD_SIZE_X; j++)
-//            {
-//                if(!fallingTable[i][j] && resultTable[i][j])
-//                    System.out.print("X ");
-//                else if (fallingTable[i][j])
-//                {
-//                    System.out.print("X ");
-//                } else
-//                {
-//                    System.out.print("o ");
-//                }
-//
-//            }
-//            System.out.print('\n');
-//        }
-//        System.out.println();
-//        System.out.println();
+
+        if(stoppedFalling)
+        {
+            rowsToErase = scoredRows(shapeTab.cellColored);
+            if(!rowsToErase.isEmpty())
+            {
+                updateResultTab(rowsToErase);
+            }
+        }
+
+        for (int i = 0; i < BOARD_SIZE_Y; i++)
+        {
+            for (int j = 0; j < BOARD_SIZE_X; j++)
+            {
+                if(!fallingTable[i][j] && shapeTab.cellColored[i][j])
+                    System.out.print("X ");
+                else if (fallingTable[i][j])
+                {
+                    System.out.print("X ");
+                } else
+                {
+                    System.out.print("o ");
+                }
+
+            }
+            System.out.print('\n');
+        }
+        System.out.println();
+        System.out.println();
+    }
+
+    public long countScore()
+    {
+        long score = 0;
+        switch(scoredRows)
+        {
+            case 0:
+                return 0;
+            case 1:
+                score = 40;
+                break;
+            case 2:
+                score = 100;
+                break;
+            case 3:
+                score = 300;
+                break;
+            case 4:
+                score = 1200;
+                break;
+        }
+        scoredRows = 0;
+        return score;
+    }
+    private List<Integer> scoredRows (boolean resultTable[][])
+    {
+        int countTrueCells = 0;
+
+        List<Integer> rowsToErase = new ArrayList<Integer>();
+
+        for (int i = BOARD_SIZE_Y - 1; i >= 0; i--)
+        {
+            for (int j = 0; j < BOARD_SIZE_X; j++)
+            {
+                if(resultTable[i][j])
+                {
+                    countTrueCells++;
+                    if(countTrueCells == BOARD_SIZE_X)
+                    {
+                        scoredRows++;
+                        rowsToErase.add(i);
+                    }
+                }else
+                {
+                    break;
+                }
+            }
+                countTrueCells = 0;
+        }
+        return rowsToErase;
+    }
+    private void updateResultTab(List<Integer> scoredRows)
+    {
+        ShapeTab tmp = new ShapeTab();
+
+        int k = 0,
+            i = BOARD_SIZE_Y - 1,
+            j = BOARD_SIZE_Y - 1;
+
+        while (i >= 0 && j >= 0)
+        {
+            if(k < scoredRows.size() && i == scoredRows.get(k))
+            {
+                i--;
+                k++;
+            } else
+            {
+                tmp.shape[j] = shapeTab.shape[i];
+                tmp.cellColored[j] = shapeTab.cellColored[i];
+                i--;
+                j--;
+            }
+        }
+        shapeTab = tmp;
     }
     private void rotateCell(Cell cell)
     {
-
             int tmpXCoord = cell.getCoordX();
             int tmpYCoord = cell.getCoordY();
 
@@ -213,19 +298,32 @@ public class Board
         return BOARD_SIZE_Y;
     }
 
-    public boolean[][] getFallingTable()
+    public ShapeTab getShapeTab()
     {
-        return fallingTable;
+        return shapeTab;
     }
 
-    public boolean isStoppedFalling()
+    public Cell getCurrentRotationAxisPos()
     {
-        return stoppedFalling;
+        return currentRotationAxisPos;
     }
 
-    public boolean[][] getResultTable()
+    public boolean isGameOver(Tetromino tetromino)
     {
-        return resultTable;
+        if (collisionDetected(currentTetrominoCoords, currentRotationAxisPos))
+        {
+            if (tetromino.getCurrentShape() != Tetromino.Shape.shapeI && currentRotationAxisPos.getCoordY() == STARTING_CELL.getCoordY())
+            {
+                return true;
+            }else if(currentRotationAxisPos.getCoordY() == STARTING_CELL.getCoordY() + 1)
+            {
+                return true;
+            }
+        } else
+        {
+            return false;
+        }
+        return false;
     }
 
     public Cell[] getTetromino()

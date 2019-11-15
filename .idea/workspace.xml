@@ -3,19 +3,30 @@
   <component name="ChangeListManager">
     <list default="true" id="79706c9d-5af1-4921-9d61-723b5111c89e" name="Default Changelist" comment="Falling fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/com/Jarosław/Filipiuk/projekt/tetris/Tetris$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/com/Jarosław/Filipiuk/projekt/tetris/Tetris$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/com/Jarosław/Filipiuk/projekt/tetris/Tetris.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/com/Jarosław/Filipiuk/projekt/tetris/Tetris.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/controller/BoardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/controller/BoardController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/controller/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/gui/BoardView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/gui/GameBoardPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/gui/GameBoardPanel$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/gui/GameBoardPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/gui/GameBoardPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/gui/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/gui/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/gui/TetrominoShape.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board$Move.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board$Move.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino$Shape.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino$Shape.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/model/Tetromino.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Jarosław/Filipiuk/projekt/tetris/Tetris.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Jarosław/Filipiuk/projekt/tetris/Tetris.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/TimeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/TimeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/GameBoardPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ShapeTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ShapeTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Tetromino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Tetromino.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +51,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Swing1" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -117,6 +128,9 @@
       <workItem from="1573640299829" duration="249000" />
       <workItem from="1573640621799" duration="1497000" />
       <workItem from="1573646517718" duration="5923000" />
+      <workItem from="1573658179898" duration="22770000" />
+      <workItem from="1573728314545" duration="7020000" />
+      <workItem from="1573760115021" duration="29246000" />
     </task>
     <task id="LOCAL-00001" summary="Falling fixed">
       <created>1572769619663</created>
@@ -153,10 +167,25 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/gui/GameBoardPanel.java</url>
-          <line>61</line>
+          <line>59</line>
           <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/model/Board.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/model/Board.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="106" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="resultBoardView[20][11].accessibleContext" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

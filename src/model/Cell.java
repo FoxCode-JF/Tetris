@@ -31,8 +31,4 @@ public class Cell
     {
         this.coordY = coordY;
     }
-
-
-
-
 }

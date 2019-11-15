@@ -6,8 +6,7 @@ import model.Board;
 import model.Tetromino;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class Tetris
 {
@@ -18,7 +17,12 @@ public class Tetris
             @Override
             public void run()
             {
-                    GameController gameController = new GameController();
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                    ex.printStackTrace();
+                }
+                GameController gameController = new GameController();
             }
         });
     }

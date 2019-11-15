@@ -13,8 +13,10 @@ public class Tetromino
         shapeS,
         shapeZ,
         shapeJ,
-        shapeL
+        shapeL,
+        empty
     }
+
     //fix orientation
     private static final Map<Shape, int[][]> SHAPE_COORD_MAP = Map.ofEntries(
             Map.entry(Shape.shapeI, new int[][]{{-1, 0}, {0, 0}, {1, 0}, {2, 0}}),
@@ -48,10 +50,6 @@ public class Tetromino
         int randInt = r.nextInt(7);
 
         setCurrentTetromino(AVAILABLE_SHAPES[randInt]);
-    }
-
-    public void rotate()
-    {
     }
 
     public Cell[] getCurrentCells()

@@ -24,16 +24,22 @@ public class BoardController
 
     public void drawBoard()
     {
-        board.fillTable();
+        board.fillTable(tetromino);
         gameBoard.updateBoardView(board, tetromino);
     }
 
     public void updateResult(){
-        gameBoard.updateResultBoard(tetromino);
+        gameBoard.updateResultBoard();
     }
 
     public Tetromino getTetromino()
     {
         return tetromino;
     }
+
+    boolean gameOver()
+    {
+        return board.isGameOver(tetromino);
+    }
+
 }

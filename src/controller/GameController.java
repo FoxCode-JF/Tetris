@@ -13,21 +13,21 @@ public class GameController extends KeyAdapter implements ActionListener
     private boolean drop = false;
     private boolean isPaused = false;
     private Board board = new Board();
-    private MainFrame mainFrame = new MainFrame();
+    private MainFrame mainFrame;
     private BoardController boardController;
     private TimeController timer;
+    private long score;
 
     public GameController()
     {
         GameBoardPanel gameBoard = createBoard();
+        mainFrame = new MainFrame(gameBoard);
         mainFrame.add(gameBoard);
         mainFrame.addKeyListener(this);
-        startGame();
     }
 
-    private void startGame(){
+    public void startGame(){
         timer = new TimeController(this);
-        timer.setActionCommand("run");
         timer.start();
     }
 
@@ -41,6 +41,9 @@ public class GameController extends KeyAdapter implements ActionListener
     {
         if (isPaused)
             return;
+
+        score += board.countScore();
+        mainFrame.setScoreLabel(String.valueOf(score));
 
         if (stoppedFalling)
         {
@@ -57,18 +60,20 @@ public class GameController extends KeyAdapter implements ActionListener
         {
             stoppedFalling = board.moveTetromino(Board.Move.down);
         }
+
         boardController.drawBoard();
+
+        if(boardController.gameOver())
+        {
+            timer.stop();
+            return;
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
-        switch(actionEvent.getActionCommand())
-        {
-            case "run":
-                run();
-                break;
-        }
+        run();
     }
 
     @Override
@@ -83,6 +88,9 @@ public class GameController extends KeyAdapter implements ActionListener
         {
             switch (key)
             {
+                case KeyEvent.VK_S:
+                    startGame();
+                    break;
                 case KeyEvent.VK_RIGHT:
                     board.moveTetromino(Board.Move.right);
                     break;
@@ -90,7 +98,7 @@ public class GameController extends KeyAdapter implements ActionListener
                     board.moveTetromino(Board.Move.left); // moves block left
                     break;
                 case KeyEvent.VK_DOWN:
-                    timer.shortenDelay(2);
+                    timer.shortenDelay(15);
                     break;
                 case KeyEvent.VK_UP:
                     if(!(boardController.getTetromino().getCurrentShape() == Tetromino.Shape.shapeO))
@@ -100,7 +108,7 @@ public class GameController extends KeyAdapter implements ActionListener
                     break;
                 case KeyEvent.VK_SPACE:
                     drop = true;
-                    timer.shortenDelay(8);
+                    timer.shortenDelay(15);
                     break;
                 case KeyEvent.VK_P:
                     isPaused = true;
