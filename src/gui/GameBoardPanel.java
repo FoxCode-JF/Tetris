@@ -7,16 +7,20 @@ import model.Tetromino;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GameBoardPanel extends JPanel implements ActionListener
+/**
+ * Class representing game board view
+ */
+public class GameBoardPanel extends JPanel
 {
     private Board board;
     private JPanel[][] fallingBoardView;
     private JPanel[][] resultBoardView;
-    Dimension dim = new Dimension();
 
+    /**
+     * Initializes new game board panel with a board it shows
+     * @param board Board model to be presented
+     */
     public GameBoardPanel(Board board)
     {
         this.board = board;
@@ -27,6 +31,7 @@ public class GameBoardPanel extends JPanel implements ActionListener
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
         setPreferredSize(new Dimension(board.getBOARD_SIZE_X() * 30, board.getBOARD_SIZE_Y() * 30));
         setBackground(Color.BLACK);
+        Dimension dim = new Dimension();
         dim.setSize(30, 30);
 
         //draw tetris blocks
@@ -46,13 +51,11 @@ public class GameBoardPanel extends JPanel implements ActionListener
         }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent)
-    {
-
-    }
-
-    public void updateBoardView(Board board, Tetromino tetromino)
+    /**
+     * Updates view by showing current result and falling tetromino
+     * @param tetromino Falling tetromino
+     */
+    public void updateBoardView(Tetromino tetromino)
     {
         Cell[] tetrominoOnBoard = board.getTetromino();
 
@@ -64,10 +67,10 @@ public class GameBoardPanel extends JPanel implements ActionListener
             }
         }
 
-        for (Cell tetr : tetrominoOnBoard)
+        for (Cell tetrominoCell : tetrominoOnBoard)
         {
-            int x = tetr.getCoordX();
-            int y = tetr.getCoordY();
+            int x = tetrominoCell.getCoordX();
+            int y = tetrominoCell.getCoordY();
             switch (tetromino.getCurrentShape())
             {
                 case shapeI:
@@ -92,10 +95,12 @@ public class GameBoardPanel extends JPanel implements ActionListener
                     fallingBoardView[y][x].setBackground(new Color(148, 0, 211));
                     break;
             }
-
         }
     }
 
+    /**
+     * Updates the result view with current result board
+     */
     public void updateResultBoard()
     {
         ShapeTab shapeTab = board.getShapeTab();
@@ -138,5 +143,4 @@ public class GameBoardPanel extends JPanel implements ActionListener
             }
         }
     }
-
-    }
+}

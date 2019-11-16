@@ -3,21 +3,35 @@ package controller;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class TimeController extends Timer
+/**
+ * Class representing game timer
+ */
+class TimeController extends Timer
 {
     private static int DEFAULT_INTERVAL = 500;
 
-    public TimeController(ActionListener listener)
+    /**
+     * Initializes timer and adds its listener
+     * @param listener Timer listener
+     */
+    TimeController(ActionListener listener)
     {
         super(DEFAULT_INTERVAL, listener);
     }
 
-    public void shortenDelay(int timesShorter)
+    /**
+     * Shortens timer interval
+     * @param timesShorter Value by which interval is divided
+     */
+    void shortenDelay(int timesShorter)
     {
         setDelay(DEFAULT_INTERVAL/timesShorter);
     }
 
-    public void setDefaultDelay(){
+    /**
+     * Sets default timer interval
+     */
+    void setDefaultDelay(){
         setDelay(DEFAULT_INTERVAL);
     }
 }

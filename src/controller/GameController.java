@@ -3,31 +3,45 @@ package controller;
 import gui.GameBoardPanel;
 import gui.MainFrame;
 import model.Board;
+import model.ScoringModel;
 import model.Tetromino;
 
 import java.awt.event.*;
 
+/**
+ * Class representing the main controller of the game
+ */
 public class GameController extends KeyAdapter implements ActionListener
 {
     private static boolean stoppedFalling =  true;
     private boolean drop = false;
     private boolean isPaused = false;
+    private boolean isStarted = false;
     private Board board = new Board();
     private MainFrame mainFrame;
     private BoardController boardController;
     private TimeController timer;
+    private  ScoringModel scoringModel = new ScoringModel();
     private long score;
 
+    /**
+     * Initializes game controller by creating a game board and setting the main window
+     */
     public GameController()
     {
         GameBoardPanel gameBoard = createBoard();
+        timer = new TimeController(this);
         mainFrame = new MainFrame(gameBoard);
-        mainFrame.add(gameBoard);
-        mainFrame.addKeyListener(this);
+        mainFrame.addKeyListener(new KeyListener());
+        mainFrame.addStartListener(new StartListener());
+        mainFrame.requestFocus();
     }
 
-    public void startGame(){
-        timer = new TimeController(this);
+    private void startGame(){
+        isStarted = true;
+        board.clearBoard();
+        score = 0;
+        stoppedFalling = true;
         timer.start();
     }
 
@@ -42,7 +56,8 @@ public class GameController extends KeyAdapter implements ActionListener
         if (isPaused)
             return;
 
-        score += board.countScore();
+        score += scoringModel.countScore(board.getScoredRowsNumber());
+        board.resetScoredRowsNumber();
         mainFrame.setScoreLabel(String.valueOf(score));
 
         if (stoppedFalling)
@@ -66,7 +81,7 @@ public class GameController extends KeyAdapter implements ActionListener
         if(boardController.gameOver())
         {
             timer.stop();
-            return;
+            mainFrame.gameOver();
         }
     }
 
@@ -76,60 +91,69 @@ public class GameController extends KeyAdapter implements ActionListener
         run();
     }
 
-    @Override
-    public void keyPressed(KeyEvent e)
-    {
-        if(drop)
-            return;
-
-        int key = e.getKeyCode();
-
-        if(!isPaused)
-        {
-            switch (key)
-            {
-                case KeyEvent.VK_S:
-                    startGame();
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    board.moveTetromino(Board.Move.right);
-                    break;
-                case KeyEvent.VK_LEFT:
-                    board.moveTetromino(Board.Move.left); // moves block left
-                    break;
-                case KeyEvent.VK_DOWN:
-                    timer.shortenDelay(15);
-                    break;
-                case KeyEvent.VK_UP:
-                    if(!(boardController.getTetromino().getCurrentShape() == Tetromino.Shape.shapeO))
-                    {
-                        board.moveTetromino(Board.Move.rotate);
-                    }
-                    break;
-                case KeyEvent.VK_SPACE:
-                    drop = true;
-                    timer.shortenDelay(15);
-                    break;
-                case KeyEvent.VK_P:
-                    isPaused = true;
-                    break;
-            }
-        }
-        else if (key == KeyEvent.VK_P){
-            isPaused = false;
+    class StartListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mainFrame.disableStartButton();
+            mainFrame.gameOverPanel.setVisible(false);
+            mainFrame.requestFocus();
+            startGame();
         }
     }
 
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-        int key = e.getKeyCode();
-
-        switch (key)
+    class KeyListener extends KeyAdapter{
+        @Override
+        public void keyPressed(KeyEvent e)
         {
-            case KeyEvent.VK_DOWN:
+            if(drop || !isStarted)
+                return;
+
+            int key = e.getKeyCode();
+
+            if(!isPaused)
+            {
+                switch (key)
+                {
+                    case KeyEvent.VK_RIGHT:
+                        board.moveTetromino(Board.Move.right);
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        board.moveTetromino(Board.Move.left); // moves block left
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        timer.shortenDelay(15);
+                        break;
+                    case KeyEvent.VK_UP:
+                        if(!(boardController.getTetromino().getCurrentShape() == Tetromino.Shape.shapeO))
+                        {
+                            board.moveTetromino(Board.Move.rotate);
+                        }
+                        break;
+                    case KeyEvent.VK_SPACE:
+                        drop = true;
+                        timer.shortenDelay(18);
+                        break;
+                    case KeyEvent.VK_P:
+                        isPaused = true;
+                        break;
+                }
+            }
+            else if (key == KeyEvent.VK_P){
+                isPaused = false;
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e)
+        {
+            if(!isStarted)
+                return;
+
+            int key = e.getKeyCode();
+
+            if (key == KeyEvent.VK_DOWN) {
                 timer.setDefaultDelay();
-                break;
+            }
         }
     }
 }

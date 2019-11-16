@@ -3,8 +3,14 @@ package model;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Class representing single element placed on the game board. Instantiated only once, changes its shape.
+ */
 public class Tetromino
 {
+    /**
+     * Possible shapes of the Tetromino
+     */
     public enum Shape
     {
         shapeI,
@@ -15,6 +21,31 @@ public class Tetromino
         shapeJ,
         shapeL,
         empty
+    }
+
+    /**
+     * Randomly generates shape of the Tetromino element and sets its Cells coordinates
+     */
+    public void generateRandomShape()
+    {
+        Random r = new Random();
+        int randInt = r.nextInt(7);
+
+        setCurrentTetromino(AVAILABLE_SHAPES[randInt]);
+    }
+
+    Cell[] getCurrentCells()
+    {
+        return currentCells;
+    }
+
+    /**
+     * Returns current shape of the Tetromino
+     * @return Current Shape of the Tetromino
+     */
+    public Shape getCurrentShape()
+    {
+        return currentShape;
     }
 
     //fix orientation
@@ -29,7 +60,6 @@ public class Tetromino
     );
     private static final Shape[] AVAILABLE_SHAPES = Shape.values();
     private Shape currentShape;
-
     private Cell[] currentCells;
 
     private void setCurrentTetromino(Shape shape)
@@ -42,23 +72,5 @@ public class Tetromino
         {
             currentCells[i] = new Cell(coords[i][0],coords[i][1]);
         }
-    }
-
-    public void generateRandomShape()
-    {
-        Random r = new Random();
-        int randInt = r.nextInt(7);
-
-        setCurrentTetromino(AVAILABLE_SHAPES[randInt]);
-    }
-
-    public Cell[] getCurrentCells()
-    {
-        return currentCells;
-    }
-
-    public Shape getCurrentShape()
-    {
-        return currentShape;
     }
 }
